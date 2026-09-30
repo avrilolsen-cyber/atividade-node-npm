@@ -10,38 +10,38 @@ import { FaReact, FaNodeJs, FaNpm, FaHeart, FaStar, FaRocket } from 'react-icons
 // EXERCÍCIO 2 - react-confetti
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import Confetti from 'react-confetti'
+import Confetti from 'react-confetti'
 
 // ============================================
 // EXERCÍCIO 3 - dayjs
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 // ============================================
 // EXERCÍCIO 4 - react-toastify
 // TODO: Descomente as linhas abaixo após instalar
 // ============================================
-// import { ToastContainer, toast } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 // ============================================
 // EXERCÍCIO 5 - uuid
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 // ============================================
 // EXERCÍCIO 6 - react-spinners
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import { ClipLoader, BounceLoader, RingLoader, PulseLoader } from 'react-spinners'
+import { ClipLoader, BounceLoader, RingLoader, PulseLoader } from 'react-spinners'
 
 // ============================================
 // EXERCÍCIO 7 - react-type-animation
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import { TypeAnimation } from 'react-type-animation'
+import { TypeAnimation } from 'react-type-animation'
 
 function App() {
   // Estado para exercício 2 (confetti)
@@ -120,11 +120,11 @@ import { FaReact, FaNodeJs, FaNpm } from 'react-icons/fa'
               <li>O botao abaixo ja alterna o estado!</li>
             </ul>
 
-            <pre>{`// Import:
+            <pre> Import:
 import Confetti from 'react-confetti'
 
 // No JSX (dentro do card-body, onde diz "Confetes vao aparecer aqui"):
-{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}`}</pre>
+{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}</pre>
 
             <button className="btn btn-green" onClick={() => setShowConfetti(!showConfetti)}>
               {showConfetti ? 'Parar Confetes' : 'Soltar Confetes!'}
@@ -132,7 +132,8 @@ import Confetti from 'react-confetti'
 
             <div className="preview-area">
               {/* TODO: Renderize <Confetti /> aqui quando showConfetti for true */}
-              {showConfetti ? '🎉 Confetes deveriam estar aparecendo!' : 'Confetes vao aparecer aqui'}
+              {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight}/>}
+
             </div>
           </div>
         </div>
@@ -163,11 +164,11 @@ dayjs('2026-12-25').diff(dayjs(), 'day') // dias até Natal`}</pre>
 
             <div className="preview-area" style={{ textAlign: 'left', fontStyle: 'normal', fontFamily: 'monospace' }}>
               {/* TODO: Substitua os "???" usando dayjs() */}
-              <p>Data de hoje: <strong>???</strong></p>
-              <p>Hora atual: <strong>???</strong></p>
-              <p>Dia da semana: <strong>???</strong></p>
-              <p>Dias para o Natal: <strong>???</strong></p>
-              <p>Dias desde 01/01/2000: <strong>???</strong></p>
+              <p>Data de hoje: <strong>{dayjs().format('DD/MM/YYYY')}</strong></p>
+                <p>Hora atual: <strong>{dayjs().format('HH:mm:ss')}</strong></p>
+                <p>Dia da semana: <strong>{dayjs().format('dddd')    }</strong></p>
+              <p>Dias para o Natal: <strong>{dayjs('2026-12-25').diff(dayjs(), 'day')}</strong></p>
+              <p>Dias desde 01/01/2000: <strong>{dayjs().diff(dayjs('2000-01-01'), 'day') }</strong></p>
             </div>
           </div>
         </div>
@@ -206,26 +207,27 @@ toast.warn('Cuidado!')`}</pre>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
               <button className="btn btn-green" onClick={() => {
                 // TODO: Substitua o alert por toast.success('Parabens! Voce conseguiu!')
-                alert('TODO: Substitua por toast.success()')
+                toast.success('Parabens! Voce conseguiu!')
               }}>Sucesso</button>
 
               <button className="btn" style={{ background: '#da3633' }} onClick={() => {
                 // TODO: Substitua o alert por toast.error('Algo deu errado!')
-                alert('TODO: Substitua por toast.error()')
+                toast.error('Algo deu errado!')
               }}>Erro</button>
 
               <button className="btn btn-blue" onClick={() => {
                 // TODO: Substitua o alert por toast.info('Voce sabia? NPM tem mais de 2 milhões de pacotes!')
-                alert('TODO: Substitua por toast.info()')
+                toast.info('Voce sabia? NPM tem mais de 2 milhões de pacotes!')
+                
               }}>Info</button>
 
               <button className="btn" style={{ background: '#d29922' }} onClick={() => {
                 // TODO: Substitua o alert por toast.warn('Cuidado com pacotes desconhecidos!')
-                alert('TODO: Substitua por toast.warn()')
+              toast.warn('Cuidado com pacotes desconhecidos!')
               }}>Aviso</button>
             </div>
 
-            {/* TODO: Adicione <ToastContainer /> aqui */}
+            <ToastContainer /> 
           </div>
         </div>
 
@@ -265,13 +267,14 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
                 onChange={(e) => setNomeInput(e.target.value)}
               />
               <button className="btn btn-green" onClick={() => {
-                if (!nomeInput.trim()) return
-                // TODO: Crie o usuario com uuidv4() como id
-                // TODO: Adicione ao array com setUsuarios
-                // TODO: Limpe o input com setNomeInput('')
-
-                // Remova este alert quando implementar:
-                alert('TODO: Implemente a criação do usuario com uuid')
+                if (!nomeInput.trim()) return 
+                const novoUsuario = {
+                  id: uuidv4(),           // "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+                  nome: nomeInput,
+                  criadoEm: new Date().toLocaleString()
+                }
+                setUsuarios([...usuarios, novoUsuario])
+                
               }}>Adicionar</button>
             </div>
 
@@ -326,10 +329,10 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
               {loading
                 ? <>
                     {/* TODO: Substitua estes textos pelos componentes de spinner */}
-                    <span>ClipLoader</span>
-                    <span>BounceLoader</span>
-                    <span>RingLoader</span>
-                    <span>PulseLoader</span>
+                    <span><ClipLoader color="#58a6ff" loading={loading} size={50}></ClipLoader></span>
+                    <span><BounceLoader color="#7ee787" loading={loading} size={60}></BounceLoader></span>
+                    <span><RingLoader color="#f0883e" loading={loading} size={50}></RingLoader></span>
+                    <span><PulseLoader color="#a371f7" loading={loading} size={15}></PulseLoader></span>
                   </>
                 : 'Clique no botao para ver os spinners'
               }
@@ -372,7 +375,19 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
 
             <div className="preview-area" style={{ fontStyle: 'normal', fontSize: '1.5rem' }}>
               {/* TODO: Substitua o texto abaixo pelo componente <TypeAnimation /> */}
-              <h2 style={{ color: '#58a6ff' }}>Texto animado vai aparecer aqui...</h2>
+              <h2 style={{ color: '#58a6ff' }}><TypeAnimation
+  sequence={[
+    'Eu amo React!', 2000,
+    'Eu amo Node.js!', 2000,
+    'Eu amo NPM!', 2000,
+    'Eu amo programar!', 2000,
+  ]}
+  wrapper="h2"
+  speed={50}
+  repeat={Infinity}
+  style={{ color: '#58a6ff' }}
+/></h2>
+
             </div>
           </div>
         </div>
@@ -403,7 +418,7 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
 
       </div>
 
-      {/* TODO: Adicione <ToastContainer /> aqui quando implementar exercicio 4 */}
+       <ToastContainer/>
 
       <footer>
         <p>SENAI - Atividades Node.js, NPM & React</p>
